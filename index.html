@@ -1,33 +1,653 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gencer's Portfolio | Software Developer & Data Scientist</title>
-    <meta name="description" content="Personal portfolio of Gencer - Software Developer & Data Scientist. Explore my projects, skills, and experience." />
-    <meta name="author" content="Gencer" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gencer Sarp Mert | Quantitative Developer & ML Engineer</title>
+  <meta name="description" content="Gencer Sarp Mert — Quantitative Developer and ML Engineer. Oxford & Carleton College. Experienced in high-frequency data systems, computer vision, and deep learning research." />
+  <meta name="author" content="Gencer Sarp Mert" />
+  <meta property="og:title" content="Gencer Sarp Mert | Quantitative Developer & ML Engineer" />
+  <meta property="og:description" content="Portfolio of Gencer Sarp Mert — quant dev, ML engineer, and CS researcher." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/png" href="/code.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    <meta property="og:title" content="Gencer's Portfolio | Software Developer & Data Scientist" />
-    <meta property="og:description" content="Personal portfolio of Gencer - Software Developer & Data Scientist. Explore my projects, skills, and experience." />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    :root {
+      --bg:        #070b13;
+      --bg2:       #0c1220;
+      --bg3:       #111827;
+      --border:    #1a2540;
+      --accent:    #38bdf8;
+      --accent2:   #818cf8;
+      --text:      #e2e8f0;
+      --muted:     #8b9ab8;
+      --tag-bg:    #0f1e35;
+      --tag-text:  #7dd3fc;
+    }
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Use code.png as favicon -->
-    <link rel="icon" type="image/png" href="/code.png" />
-    <script type="module" crossorigin src="/assets/index-Bube4dhY.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-CzuznXRQ.css">
-  </head>
+    html { scroll-behavior: smooth; }
 
-  <body>
-    <div id="root"></div>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-  </body>
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Scrollbar ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      height: 60px;
+      background: rgba(7,11,19,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); font-size: 0.8rem; text-decoration: none;
+      letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── Layout ── */
+    .container { max-width: 860px; margin: 0 auto; padding: 0 clamp(1.5rem, 5vw, 2rem); }
+
+    section { padding: 5rem 0; }
+    section + section { border-top: 1px solid var(--border); }
+
+    .section-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding-top: 80px;
+    }
+    .hero-inner { max-width: 720px; }
+    .hero-greeting {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      margin-bottom: 1.2rem;
+    }
+    .hero-name {
+      font-size: clamp(2.8rem, 7vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .hero-title {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-weight: 400;
+      color: var(--muted);
+      margin-bottom: 1.8rem;
+    }
+    .hero-title span { color: var(--accent2); font-weight: 500; }
+    .hero-desc {
+      color: var(--muted);
+      max-width: 560px;
+      font-size: 0.97rem;
+      margin-bottom: 2.4rem;
+      line-height: 1.75;
+    }
+    .hero-links { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.6rem 1.3rem;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+      letter-spacing: 0.02em;
+    }
+    .btn-primary {
+      background: var(--accent); color: #070b13;
+    }
+    .btn-primary:hover { background: #7dd3fc; }
+    .btn-outline {
+      border: 1px solid var(--border); color: var(--muted);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Experience timeline ── */
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .tl-item {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 0 2rem;
+      padding: 1.6rem 0;
+      border-top: 1px solid var(--border);
+      position: relative;
+    }
+    .tl-item:last-child { border-bottom: 1px solid var(--border); }
+    .tl-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      padding-top: 0.3rem;
+      line-height: 1.5;
+    }
+    .tl-date .badge {
+      display: inline-block;
+      background: rgba(56,189,248,0.1);
+      color: var(--accent);
+      border: 1px solid rgba(56,189,248,0.25);
+      font-size: 0.65rem;
+      padding: 0.15rem 0.4rem;
+      border-radius: 3px;
+      margin-top: 0.35rem;
+      letter-spacing: 0.05em;
+    }
+    .tl-body {}
+    .tl-company {
+      font-size: 0.72rem;
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+    .tl-role {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.8rem;
+    }
+    .tl-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; }
+    .tl-bullets li {
+      font-size: 0.875rem;
+      color: var(--muted);
+      padding-left: 1.1rem;
+      position: relative;
+    }
+    .tl-bullets li::before {
+      content: '▸';
+      position: absolute; left: 0;
+      color: var(--accent);
+      font-size: 0.7rem;
+      top: 0.18rem;
+    }
+
+    /* ── Research ── */
+    .research-grid { display: flex; flex-direction: column; gap: 0; }
+
+    /* ── Education ── */
+    .edu-grid { display: flex; flex-direction: column; gap: 1.2rem; }
+    .edu-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.4rem 1.6rem;
+    }
+    .edu-school {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+    .edu-degree {
+      font-size: 0.85rem;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+      font-weight: 500;
+    }
+    .edu-courses {
+      font-size: 0.8rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+    .edu-courses strong { color: var(--text); font-weight: 500; }
+
+    /* ── Achievements ── */
+    .ach-list { display: flex; flex-direction: column; gap: 0; }
+    .ach-item {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 0 2rem;
+      padding: 1.3rem 0;
+      border-top: 1px solid var(--border);
+    }
+    .ach-item:last-child { border-bottom: 1px solid var(--border); }
+    .ach-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      padding-top: 0.25rem;
+    }
+    .ach-title { font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 0.25rem; }
+    .ach-desc { font-size: 0.85rem; color: var(--muted); }
+
+    /* ── Skills ── */
+    .skills-groups { display: flex; flex-direction: column; gap: 1.5rem; }
+    .skill-group-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.7rem;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .tag {
+      background: var(--tag-bg);
+      color: var(--tag-text);
+      border: 1px solid rgba(56,189,248,0.15);
+      font-size: 0.78rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 5px;
+      font-family: 'JetBrains Mono', monospace;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .tag:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Contact ── */
+    #contact .contact-inner {
+      display: flex; flex-direction: column; gap: 1rem;
+      max-width: 520px;
+    }
+    #contact p { color: var(--muted); font-size: 0.95rem; }
+    .contact-links { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 0.5rem; }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+      text-align: center;
+    }
+    footer p {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--accent); }
+
+    /* ── Fade-in ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* ── Responsive ── */
+    @media (max-width: 640px) {
+      .tl-item, .ach-item {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+      }
+      .tl-date, .ach-meta { padding-top: 0; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ──────────── NAV ──────────── -->
+<nav>
+  <a href="#hero" class="nav-logo">gsm /</a>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ──────────── HERO ──────────── -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <p class="hero-greeting">// hello, world</p>
+      <h1 class="hero-name">Gencer<br>Sarp Mert</h1>
+      <p class="hero-title">
+        Quantitative Developer &amp; <span>ML Engineer</span>
+      </p>
+      <p class="hero-desc">
+        CS &amp; Math student at <strong style="color:var(--text)">Carleton College</strong>, currently on exchange at
+        <strong style="color:var(--text)">University of Oxford</strong>. I build low-latency data systems, computer vision pipelines,
+        and ML research infrastructure — ranging from high-frequency market data to deep learning on embedded hardware.
+      </p>
+      <div class="hero-links">
+        <a href="mailto:gencersarpmert3@gmail.com" class="btn btn-primary">Get in touch</a>
+        <a href="https://github.com/gencersarp" target="_blank" rel="noopener" class="btn btn-outline">GitHub</a>
+        <a href="https://linkedin.com/in/gencersarpmert" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── EXPERIENCE ──────────── -->
+<section id="experience">
+  <div class="container">
+    <p class="section-label fade-in">// work</p>
+    <h2 class="section-title fade-in">Experience</h2>
+    <div class="timeline">
+
+      <div class="tl-item fade-in">
+        <div class="tl-date">Summer 2026<div class="badge">Incoming</div></div>
+        <div class="tl-body">
+          <div class="tl-company">Balyasny Asset Management (BAM)</div>
+          <div class="tl-role">Quantitative Developer Intern</div>
+        </div>
+      </div>
+
+      <div class="tl-item fade-in">
+        <div class="tl-date">Dec 2025 –<br>Jan 2026</div>
+        <div class="tl-body">
+          <div class="tl-company">Algocor</div>
+          <div class="tl-role">Quantitative Developer Intern</div>
+          <ul class="tl-bullets">
+            <li>Designed a low-latency TimescaleDB architecture for high-frequency market data, enabling intraday factor construction and quantitative signal backtesting via time-bucketed aggregations and hypertable partitioning.</li>
+            <li>Built a warrant ingestion and normalization pipeline covering 11K+ daily instruments; enforced reference-data consistency to improve downstream pricing and anomaly detection.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item fade-in">
+        <div class="tl-date">Jul 2025 –<br>Sep 2025<div class="badge">&lt;2% accept</div></div>
+        <div class="tl-body">
+          <div class="tl-company">Roketsan</div>
+          <div class="tl-role">Software Engineering Intern</div>
+          <ul class="tl-bullets">
+            <li>Engineered CUDA/GPU and CPU-based computer vision pipeline modules, ensuring cross-platform compatibility and adherence to industry standards.</li>
+            <li>Improved detection precision by 15% in field simulations by implementing real-time image detection and tracking using deep learning models on embedded systems.</li>
+            <li>Increased FPS throughput by 20% on embedded hardware by optimizing deep learning inference pipelines.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item fade-in">
+        <div class="tl-date">Jun 2024 –<br>Dec 2024</div>
+        <div class="tl-body">
+          <div class="tl-company">Starlang Software</div>
+          <div class="tl-role">Machine Learning Engineer</div>
+          <ul class="tl-bullets">
+            <li>Achieved up to 3× speedup for large datasets by converting tensor and eigenvector computations to C.</li>
+            <li>Implemented a computational graph engine to support backpropagation and gradient-based optimization.</li>
+            <li>Reduced model training runtime by 20% by building ML utility functions (activations, loss ops).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item fade-in">
+        <div class="tl-date">Apr 2023 –<br>Sep 2023</div>
+        <div class="tl-body">
+          <div class="tl-company">Altera Telecom</div>
+          <div class="tl-role">Data Engineering Intern</div>
+          <ul class="tl-bullets">
+            <li>Engineered automated Python pipelines processing 15,000+ total records for analytics.</li>
+            <li>Cut manual data processing time by 40% through robust validation and cleaning routines.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── RESEARCH ──────────── -->
+<section id="research">
+  <div class="container">
+    <p class="section-label fade-in">// research</p>
+    <h2 class="section-title fade-in">Research</h2>
+    <div class="timeline research-grid">
+
+      <div class="tl-item fade-in">
+        <div class="tl-date">Ongoing</div>
+        <div class="tl-body">
+          <div class="tl-company">Middle East Technical University</div>
+          <div class="tl-role">Researcher — Few-Shot Learning &amp; Uncertainty</div>
+          <ul class="tl-bullets">
+            <li>Researching epistemic uncertainty in few-shot image classification using deep ensembles and active learning.</li>
+            <li>Improving confidence estimation and robustness using CLIP models and adversarial generation techniques.</li>
+            <li>Developing reproducible PyTorch pipelines for evaluation and uncertainty quantification on GPU clusters.</li>
+          </ul>
+          <div style="margin-top:0.7rem;display:flex;gap:0.4rem;flex-wrap:wrap;">
+            <span class="tag">PyTorch</span><span class="tag">CLIP</span><span class="tag">CUDA</span><span class="tag">NumPy</span><span class="tag">Pandas</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item fade-in">
+        <div class="tl-date">Ongoing</div>
+        <div class="tl-body">
+          <div class="tl-company">Ozyegin University</div>
+          <div class="tl-role">Researcher — Robot Learning &amp; Anomaly Detection</div>
+          <ul class="tl-bullets">
+            <li>Co-authoring CESN+, a lightweight Learning from Demonstration model using reservoir computing to generate movement trajectories with prediction intervals for safer robot control.</li>
+            <li>Developing multi-sensor anomaly detection modules using sensor fusion and modeling for fault detection.</li>
+          </ul>
+          <div style="margin-top:0.7rem;display:flex;gap:0.4rem;flex-wrap:wrap;">
+            <span class="tag">Jupyter</span><span class="tag">scikit-learn</span><span class="tag">SciPy</span><span class="tag">Matplotlib</span><span class="tag">NumPy</span><span class="tag">Pandas</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── EDUCATION ──────────── -->
+<section id="education">
+  <div class="container">
+    <p class="section-label fade-in">// education</p>
+    <h2 class="section-title fade-in">Education</h2>
+    <div class="edu-grid">
+
+      <div class="edu-card fade-in">
+        <div class="edu-school">University of Oxford</div>
+        <div class="edu-degree">Visiting Student — Computer Science &amp; Mathematics &nbsp;·&nbsp; 2025–2026</div>
+        <div class="edu-courses">
+          <strong>Courses:</strong> Machine Learning, Computational Game Theory, Complexity Theory, Computer Vision,
+          Algorithms, Computer Networks, Database Systems Implementation, Geometric Deep Learning
+        </div>
+      </div>
+
+      <div class="edu-card fade-in">
+        <div class="edu-school">Carleton College</div>
+        <div class="edu-degree">BA in Computer Science &amp; Mathematics</div>
+        <div class="edu-courses">
+          <strong>Courses:</strong> Data Structures, Computer Systems, Linear Algebra, Discrete Mathematics,
+          Programming Language Design and Implementation, Calculus 3
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── ACHIEVEMENTS ──────────── -->
+<section id="achievements">
+  <div class="container">
+    <p class="section-label fade-in">// recognition</p>
+    <h2 class="section-title fade-in">Achievements</h2>
+    <div class="ach-list">
+
+      <div class="ach-item fade-in">
+        <div class="ach-meta">2026</div>
+        <div>
+          <div class="ach-title">Capula Insight — Upcoming</div>
+          <div class="ach-desc">Selected to attend Capula Investment Management's insight programme.</div>
+        </div>
+      </div>
+
+      <div class="ach-item fade-in">
+        <div class="ach-meta">2025</div>
+        <div>
+          <div class="ach-title">Blackstone Insight Programme</div>
+          <div class="ach-desc">Selected to participate in Blackstone's insight event, gaining exposure to private equity and alternative asset management.</div>
+        </div>
+      </div>
+
+      <div class="ach-item fade-in">
+        <div class="ach-meta">2025</div>
+        <div>
+          <div class="ach-title">1st Place — Minnemudac ML Competition &nbsp;·&nbsp; $1,600 Prize</div>
+          <div class="ach-desc">First place in ML modeling competition; presented results to an audience of 500+ people.</div>
+        </div>
+      </div>
+
+      <div class="ach-item fade-in">
+        <div class="ach-meta">2024</div>
+        <div>
+          <div class="ach-title">2nd Place (Colleges) — MetaCTF Cybersecurity Competition</div>
+          <div class="ach-desc">Ranked 2nd among 20+ college teams in a national cybersecurity competition.</div>
+        </div>
+      </div>
+
+      <div class="ach-item fade-in">
+        <div class="ach-meta">2024</div>
+        <div>
+          <div class="ach-title">Underbrink Scholar — $280,000+</div>
+          <div class="ach-desc">Selective need- and merit-based scholarship at Carleton College totaling over $280,000.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── SKILLS ──────────── -->
+<section id="skills">
+  <div class="container">
+    <p class="section-label fade-in">// stack</p>
+    <h2 class="section-title fade-in">Skills</h2>
+    <div class="skills-groups fade-in">
+
+      <div>
+        <div class="skill-group-label">Languages</div>
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">C</span>
+          <span class="tag">C++</span>
+          <span class="tag">C#</span>
+          <span class="tag">Java</span>
+          <span class="tag">Kotlin</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Assembly</span>
+          <span class="tag">Scheme</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="skill-group-label">ML / Data</div>
+        <div class="tags">
+          <span class="tag">PyTorch</span>
+          <span class="tag">TensorFlow</span>
+          <span class="tag">scikit-learn</span>
+          <span class="tag">NumPy</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">CLIP</span>
+          <span class="tag">YOLOv8</span>
+          <span class="tag">OpenCV</span>
+          <span class="tag">CUDA</span>
+          <span class="tag">Jupyter</span>
+          <span class="tag">Matplotlib</span>
+        </div>
+      </div>
+
+      <div>
+        <div class="skill-group-label">Infrastructure / Tools</div>
+        <div class="tags">
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">TimescaleDB</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Linux</span>
+          <span class="tag">Git</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">Django</span>
+          <span class="tag">React</span>
+          <span class="tag">React Native</span>
+          <span class="tag">Selenium</span>
+          <span class="tag">GDB</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── CONTACT ──────────── -->
+<section id="contact">
+  <div class="container">
+    <p class="section-label fade-in">// contact</p>
+    <h2 class="section-title fade-in">Get In Touch</h2>
+    <div class="contact-inner fade-in">
+      <p>I'm always open to interesting conversations — whether it's a new opportunity, a research collaboration, or just a chat about quant systems or ML.</p>
+      <div class="contact-links">
+        <a href="mailto:gencersarpmert3@gmail.com" class="btn btn-primary">Send email</a>
+        <a href="https://linkedin.com/in/gencersarpmert" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
+        <a href="https://github.com/gencersarp" target="_blank" rel="noopener" class="btn btn-outline">GitHub</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── FOOTER ──────────── -->
+<footer>
+  <div class="container">
+    <p>
+      Built by <a href="#hero">Gencer Sarp Mert</a> &nbsp;·&nbsp;
+      <a href="https://github.com/gencersarp/gencersarp.github.io" target="_blank" rel="noopener">Source</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+  // Intersection observer for fade-in
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach((el, i) => {
+    el.style.transitionDelay = (i % 6) * 60 + 'ms';
+    obs.observe(el);
+  });
+</script>
+</body>
 </html>
