@@ -93,9 +93,9 @@
         transparent 72%);
       filter: blur(44px);
       /* rotate + morph border-radius + opacity pulse — all different properties, no conflict */
-      animation: bspin1 14s linear infinite,
-                 morph1 6s ease-in-out infinite,
-                 pulse1 3.8s ease-in-out infinite;
+      animation: bspin1 9s linear infinite,
+                 morph1 4s ease-in-out infinite,
+                 pulse1 2.8s ease-in-out infinite;
     }
     .blob-o2 {
       width: 180px; height: 320px;
@@ -105,39 +105,51 @@
         rgba(196,181,253,0.28) 40%,
         transparent 70%);
       filter: blur(52px);
-      animation: bspin2 9s linear infinite reverse,
-                 morph2 9s ease-in-out infinite,
-                 pulse2 5.2s ease-in-out infinite;
+      animation: bspin2 6s linear infinite reverse,
+                 morph2 6s ease-in-out infinite,
+                 pulse2 3.5s ease-in-out infinite;
       animation-delay: 0s, -3s, -1.5s;
     }
 
-    @keyframes bspin1 { to { transform: rotate(360deg); } }
-    @keyframes bspin2 { to { transform: rotate(360deg); } }
+    @keyframes bspin1 {
+      0%   { transform: rotate(0deg) scale(1); }
+      25%  { transform: rotate(90deg) scale(1.08); }
+      50%  { transform: rotate(180deg) scale(0.94); }
+      75%  { transform: rotate(270deg) scale(1.05); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+    @keyframes bspin2 {
+      0%   { transform: rotate(0deg) scale(1); }
+      30%  { transform: rotate(108deg) scale(1.1); }
+      60%  { transform: rotate(216deg) scale(0.9); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
 
     /* Blob shape morphing — irregular border-radius shifts give organic deformation */
     @keyframes morph1 {
-      0%,100% { border-radius: 62% 38% 52% 48% / 48% 58% 42% 52%; }
-      20%     { border-radius: 44% 56% 66% 34% / 58% 38% 62% 42%; }
-      40%     { border-radius: 70% 30% 42% 58% / 36% 64% 36% 64%; }
-      65%     { border-radius: 38% 62% 58% 42% / 62% 44% 56% 38%; }
-      80%     { border-radius: 55% 45% 35% 65% / 50% 68% 32% 50%; }
+      0%,100% { border-radius: 60% 40% 54% 46% / 46% 60% 40% 54%; }
+      15%     { border-radius: 38% 62% 70% 30% / 62% 34% 66% 38%; }
+      35%     { border-radius: 74% 26% 38% 62% / 32% 68% 32% 68%; }
+      55%     { border-radius: 34% 66% 60% 40% / 66% 40% 60% 34%; }
+      75%     { border-radius: 58% 42% 30% 70% / 44% 72% 28% 56%; }
     }
     @keyframes morph2 {
-      0%,100% { border-radius: 48% 52% 60% 40% / 56% 44% 56% 44%; }
-      25%     { border-radius: 66% 34% 44% 56% / 40% 62% 38% 60%; }
-      50%     { border-radius: 36% 64% 55% 45% / 64% 36% 64% 36%; }
-      75%     { border-radius: 58% 42% 38% 62% / 46% 58% 42% 54%; }
+      0%,100% { border-radius: 44% 56% 64% 36% / 60% 40% 60% 40%; }
+      20%     { border-radius: 70% 30% 40% 60% / 36% 66% 34% 64%; }
+      45%     { border-radius: 30% 70% 58% 42% / 68% 32% 68% 32%; }
+      70%     { border-radius: 62% 38% 34% 66% / 42% 62% 38% 58%; }
     }
 
-    /* Subtle opacity pulse — makes it feel like it's breathing */
+    /* Opacity pulse — breathing feel */
     @keyframes pulse1 {
       0%,100% { opacity: 1; }
-      50%     { opacity: 0.65; }
+      40%     { opacity: 0.55; }
+      70%     { opacity: 0.9; }
     }
     @keyframes pulse2 {
-      0%,100% { opacity: 0.85; }
-      40%     { opacity: 1; }
-      70%     { opacity: 0.55; }
+      0%,100% { opacity: 0.9; }
+      30%     { opacity: 1; }
+      65%     { opacity: 0.45; }
     }
 
     /* ── Custom cursor ── */
@@ -834,7 +846,7 @@
 
       <div class="glass edu-card fade" data-glow>
         <div class="edu-school"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>University of Oxford</div>
-        <div class="edu-degree">Visiting Student — Computer Science &amp; Mathematics &nbsp;·&nbsp; 2025–2026</div>
+        <div class="edu-degree">Computer Science &amp; Mathematics &nbsp;·&nbsp; 2025–2026</div>
         <div class="edu-courses">
           <strong>Courses:</strong> Machine Learning, Computational Game Theory, Complexity Theory, Computer Vision,
           Algorithms, Computer Networks, Database Systems Implementation, Geometric Deep Learning
@@ -911,8 +923,8 @@
       <div class="glass ach-card fade" data-glow>
         <div class="ach-year">2024</div>
         <div>
-          <div class="ach-title"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>2nd Place (Colleges) — MetaCTF Cybersecurity Competition</div>
-          <div class="ach-desc">Ranked 2nd among 20+ college teams in a national cybersecurity competition.</div>
+          <div class="ach-title"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Top Finisher — MetaCTF National Cybersecurity Competition</div>
+          <div class="ach-desc">Placed 2nd across all competing college teams in a national CTF competition with 20+ universities.</div>
         </div>
       </div>
 
