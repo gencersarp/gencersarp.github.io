@@ -97,8 +97,8 @@
 
     /* ── Field canvas (replaces dot grid) ── */
     #field-canvas {
-      position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      width: 100%; height: 100%;
+      position: absolute; top: 0; left: 0; z-index: 0; pointer-events: none;
+      width: 100%; height: 100vh;
       /* fade lines toward bottom of hero — permanent CSS gradient, no scroll JS */
       mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 84%);
       -webkit-mask-image: linear-gradient(to bottom, black 0%, black 55%, transparent 84%);
