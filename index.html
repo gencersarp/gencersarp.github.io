@@ -1362,11 +1362,18 @@
         if (d2 >= R2) continue;
         const d     = Math.sqrt(d2);
         const force = (1 - d / RADIUS) ** 1.6;
-        // Lean away from cursor; diff from baseAngle so force=1 → fully pointing away
+        // Skip near-edge updates: as cursor exits radius, force→0 which would
+        // reset angle back toward baseAngle — exactly what we don't want.
+        if (force < 0.06) continue;
         let diff = Math.atan2(dy, dx) - l.baseAngle;
         if (diff >  Math.PI) diff -= 2 * Math.PI;
         if (diff < -Math.PI) diff += 2 * Math.PI;
-        l.angle = l.baseAngle + diff * force;  // direct set — persists after cursor leaves
+        const newAngle = l.baseAngle + diff * force;
+        // Only commit if this deflects more than the current state — lines
+        // accumulate their largest deflection and never drift back.
+        if (Math.abs(newAngle - l.baseAngle) >= Math.abs(l.angle - l.baseAngle)) {
+          l.angle = newAngle;
+        }
       }
     }
 
@@ -1526,43 +1533,6 @@ document.fonts.ready.then(function () {
   }
 });
 
-// ── Effect 2: .stat-num count-up on intersection ──
-(function () {
-  var els = Array.from(document.querySelectorAll('.stat-num'));
-  if (!els.length) return;
-
-  // Pre-zero immediately so the 0→N animation is always visible
-  els.forEach(function (el) { el.textContent = '0'; });
-
-  function numAnim(el, to, pre, suf, dur) {
-    var t0 = performance.now();
-    (function tick(now) {
-      var p = Math.min((now - t0) / dur, 1);
-      el.textContent = pre + Math.round(to * (1 - Math.pow(1 - p, 3))) + suf;
-      if (p < 1) requestAnimationFrame(tick);
-    })(performance.now());
-  }
-
-  var fired = false;
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (!e.isIntersecting || fired) return;
-      fired = true;
-      io.disconnect();
-      setTimeout(function () {
-        numAnim(els[0], 5,   '',  '+',  1100);
-        numAnim(els[1], 2,   '',  '',    800);
-        var seq = ['9th','5th','3rd','2nd','1st'];
-        seq.forEach(function (v, j) {
-          setTimeout(function () { els[2].textContent = v; }, j * 140);
-        });
-        numAnim(els[3], 280, '$', 'k+', 1500);
-      }, 300);
-    });
-  }, { threshold: 0.3, rootMargin: '0px 0px -40px 0px' });
-
-  io.observe(els[0]);
-})();
 </script>
 </body>
 </html>
