@@ -1431,5 +1431,130 @@
     });
   })();
 </script>
+
+<script type="module">
+// ── Pretext effects ──
+
+// Wait for web fonts before measuring
+await document.fonts.ready;
+
+// ── Effect 1: .hero-role word push-field (via @chenglou/pretext) ──
+try {
+  const { prepare, layoutWithLines } = await import('https://esm.sh/@chenglou/pretext');
+
+  const el = document.querySelector('.hero-role');
+  if (!el) throw new Error('no .hero-role');
+
+  const cs   = getComputedStyle(el);
+  const fsz  = parseFloat(cs.fontSize);
+  const lh   = parseFloat(cs.lineHeight) || fsz * 1.6;
+  const fam  = cs.fontFamily.split(',')[0].replace(/['"]/g, '').trim();
+  const font = `${cs.fontWeight} ${cs.fontSize} ${fam}`;
+  const maxW = el.offsetWidth || 560;
+
+  // Collect words + whether they're inside <strong>
+  const words = [];
+  for (const node of el.childNodes) {
+    const bold = node.nodeType === 1 && node.tagName === 'STRONG';
+    (node.textContent || '').split(/\s+/).filter(Boolean)
+      .forEach(t => words.push({ t, bold }));
+  }
+  if (!words.length) throw new Error('no words found');
+
+  // Use pretext to get line-break layout
+  const { lines } = layoutWithLines(
+    prepare(words.map(w => w.t).join(' '), font), maxW, lh
+  );
+
+  // Measure x-positions within each line via canvas (zero DOM reflow in hot path)
+  const ctx = document.createElement('canvas').getContext('2d');
+  ctx.font   = font;
+  const spW  = ctx.measureText(' ').width;
+
+  const layout = [];
+  let wi = 0;
+  lines.forEach((line, li) => {
+    let x = 0;
+    line.text.split(' ').filter(Boolean).forEach(word => {
+      if (wi >= words.length) return;
+      const ww = ctx.measureText(word).width;
+      layout.push({ ...words[wi++], x, y: li * lh, w: ww });
+      x += ww + spW;
+    });
+  });
+
+  // Swap element content for absolutely-positioned spans
+  const totalH = lines.length * lh;
+  el.style.cssText += `;position:relative;display:block;height:${totalH}px;`;
+  el.innerHTML = '';
+
+  const spans = layout.map(wp => {
+    const span = document.createElement('span');
+    span.textContent = wp.t;
+    const topY = wp.y + (lh - fsz) * 0.42;
+    span.style.cssText =
+      `position:absolute;left:${wp.x.toFixed(1)}px;top:${topY.toFixed(1)}px;` +
+      `display:inline-block;white-space:nowrap;will-change:transform;` +
+      `transition:transform .55s cubic-bezier(.34,1.56,.64,1);` +
+      `color:${wp.bold ? 'var(--blue)' : 'var(--muted)'};` +
+      `font-weight:${wp.bold ? '600' : '400'};font-size:${cs.fontSize};`;
+    el.appendChild(span);
+    return { span, cx: wp.x + wp.w / 2, cy: topY + fsz / 2 };
+  });
+
+  const REPEL_R = 100, PUSH = 22;
+  window.addEventListener('mousemove', e => {
+    const r  = el.getBoundingClientRect();
+    const mx = e.clientX - r.left;
+    const my = e.clientY - r.top;
+    for (const { span, cx, cy } of spans) {
+      const dx = cx - mx, dy = cy - my;
+      const d  = Math.hypot(dx, dy);
+      if (d < REPEL_R && d > 0) {
+        const f = (1 - d / REPEL_R) ** 2;
+        span.style.transform =
+          `translate(${(dx / d * f * PUSH).toFixed(2)}px,${(dy / d * f * PUSH * .5).toFixed(2)}px)`;
+      } else {
+        span.style.transform = 'translate(0,0)';
+      }
+    }
+  }, { passive: true });
+
+} catch (err) {
+  // pretext unavailable or layout failed — original HTML unchanged by innerHTML='' guard above
+  console.warn('[pretext word-push]', err.message);
+}
+
+// ── Effect 2: .stat-num count-up on intersection ──
+(function () {
+  const els = [...document.querySelectorAll('.stat-num')];
+
+  function numAnim(el, to, pre, suf, dur) {
+    const t0 = performance.now();
+    (function tick(now) {
+      const p = Math.min((now - t0) / dur, 1);
+      el.textContent = pre + Math.round(to * (1 - (1 - p) ** 3)) + suf;
+      if (p < 1) requestAnimationFrame(tick);
+    })(t0);
+  }
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      io.unobserve(e.target);
+      const i = els.indexOf(e.target);
+      if (i === 0) numAnim(e.target,   5, '',  '+',  1100);
+      if (i === 1) numAnim(e.target,   2, '',  '',    800);
+      if (i === 2) {  // slot-machine spin to 1st
+        const seq = ['9th','6th','4th','2nd','1st'];
+        seq.forEach((v, j) => setTimeout(() => { e.target.textContent = v; }, j * 130));
+      }
+      if (i === 3) numAnim(e.target, 280, '$', 'k+', 1500);
+    });
+  }, { threshold: 0.7 });
+
+  els.forEach(el => io.observe(el));
+})();
+</script>
 </body>
 </html>
