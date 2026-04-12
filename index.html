@@ -468,7 +468,15 @@
       border: 1px solid rgba(99,102,241,0.2);
       padding: 0.1rem 0.45rem; border-radius: 4px;
     }
+    .co-logo {
+      width: 18px; height: 18px; border-radius: 4px;
+      object-fit: contain; flex-shrink: 0;
+      background: rgba(255,255,255,0.07); padding: 2px;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.07);
+    }
+    .edu-school .co-logo { width: 22px; height: 22px; border-radius: 5px; }
     .tl-co {
+      display: flex; align-items: center; gap: 8px;
       font-size: 0.68rem; font-weight: 600; letter-spacing: 0.12em;
       text-transform: uppercase; color: var(--blue-lt);
       margin-bottom: 0.18rem;
@@ -735,7 +743,7 @@
           <div class="tl-badge">Incoming</div>
         </div>
         <div>
-          <div class="tl-co">Balyasny Asset Management (BAM)</div>
+          <div class="tl-co"><img class="co-logo" src="https://logo.clearbit.com/balyasny.com" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=balyasny.com&sz=32'" alt="">Balyasny Asset Management (BAM)</div>
           <div class="tl-role">Quantitative Developer Intern</div>
           <p style="font-size:0.84rem;color:var(--muted);line-height:1.65;">
             Joining one of the world's leading multi-manager platforms as a quant developer — building systematic trading infrastructure, signal research pipelines, and high-performance execution systems.
@@ -746,7 +754,7 @@
       <div class="glass tl-card fade" data-glow>
         <div class="tl-meta">Dec 2025 –<br>Jan 2026</div>
         <div>
-          <div class="tl-co">Algocor</div>
+          <div class="tl-co"><img class="co-logo" src="https://logo.clearbit.com/algocor.com" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=algocor.com&sz=32'" alt="">Algocor</div>
           <div class="tl-role">Quantitative Developer Intern</div>
           <ul class="tl-bullets">
             <li>Designed a low-latency TimescaleDB architecture for high-frequency market data, enabling intraday factor construction and quantitative signal backtesting via time-bucketed aggregations and hypertable partitioning.</li>
@@ -764,7 +772,7 @@
           <div class="tl-badge">&lt;2% accept</div>
         </div>
         <div>
-          <div class="tl-co">Roketsan</div>
+          <div class="tl-co"><img class="co-logo" src="https://logo.clearbit.com/roketsan.com.tr" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=roketsan.com.tr&sz=32'" alt="">Roketsan</div>
           <div class="tl-role">Software Engineering Intern</div>
           <ul class="tl-bullets">
             <li>Engineered CUDA/GPU and CPU-based computer vision pipeline modules, ensuring cross-platform compatibility and adherence to industry standards.</li>
@@ -780,7 +788,7 @@
       <div class="glass tl-card fade" data-glow>
         <div class="tl-meta">Jun – Dec 2024</div>
         <div>
-          <div class="tl-co">Starlang Software</div>
+          <div class="tl-co"><img class="co-logo" src="https://logo.clearbit.com/starlang.com.tr" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=starlang.com.tr&sz=32'" alt="">Starlang Software</div>
           <div class="tl-role">Machine Learning Engineer</div>
           <ul class="tl-bullets">
             <li>Achieved up to 3× speedup for large datasets by converting tensor and eigenvector computations to C.</li>
@@ -796,7 +804,7 @@
       <div class="glass tl-card fade" data-glow>
         <div class="tl-meta">Apr – Sep 2023</div>
         <div>
-          <div class="tl-co">Altera Telecom</div>
+          <div class="tl-co"><img class="co-logo" src="https://logo.clearbit.com/altera.com.tr" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=altera.com.tr&sz=32'" alt="">Altera Telecom</div>
           <div class="tl-role">Data Engineering Intern</div>
           <ul class="tl-bullets">
             <li>Engineered automated Python pipelines processing 15,000+ total records for analytics.</li>
@@ -822,9 +830,9 @@
     <div class="timeline">
 
       <div class="glass tl-card fade" data-glow>
-        <div class="tl-meta">Ongoing</div>
+        <div class="tl-meta">2024 –</div>
         <div>
-          <div class="tl-co">Middle East Technical University</div>
+          <div class="tl-co"><img class="co-logo" src="https://logo.clearbit.com/metu.edu.tr" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=metu.edu.tr&sz=32'" alt="">Middle East Technical University</div>
           <div class="tl-role">Researcher — Few-Shot Learning &amp; Uncertainty</div>
           <ul class="tl-bullets">
             <li>Researching epistemic uncertainty in few-shot image classification using deep ensembles and active learning.</li>
@@ -838,9 +846,9 @@
       </div>
 
       <div class="glass tl-card fade" data-glow>
-        <div class="tl-meta">Ongoing</div>
+        <div class="tl-meta">2023 –</div>
         <div>
-          <div class="tl-co">Ozyegin University</div>
+          <div class="tl-co"><img class="co-logo" src="https://logo.clearbit.com/ozyegin.edu.tr" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=ozyegin.edu.tr&sz=32'" alt="">Ozyegin University</div>
           <div class="tl-role">Researcher — Robot Learning &amp; Anomaly Detection</div>
           <ul class="tl-bullets">
             <li>Co-authoring CESN+, a lightweight Learning from Demonstration model using reservoir computing to generate movement trajectories with prediction intervals for safer robot control.</li>
@@ -945,7 +953,7 @@
     <div class="edu-grid">
 
       <div class="glass edu-card fade" data-glow>
-        <div class="edu-school"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>University of Oxford</div>
+        <div class="edu-school"><img class="co-logo" src="https://logo.clearbit.com/ox.ac.uk" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=ox.ac.uk&sz=32'" alt="">University of Oxford</div>
         <div class="edu-degree">Computer Science &amp; Mathematics &nbsp;·&nbsp; 2025–2026</div>
         <div class="edu-courses">
           <strong>Courses:</strong> Machine Learning, Computational Game Theory, Complexity Theory, Computer Vision,
@@ -954,7 +962,7 @@
       </div>
 
       <div class="glass edu-card fade" data-glow>
-        <div class="edu-school"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>Carleton College</div>
+        <div class="edu-school"><img class="co-logo" src="https://logo.clearbit.com/carleton.edu" onerror="this.onerror=null;this.src='https://www.google.com/s2/favicons?domain=carleton.edu&sz=32'" alt="">Carleton College</div>
         <div class="edu-degree">BA — Computer Science &amp; Mathematics</div>
         <div class="edu-courses">
           <strong>Courses:</strong> Data Structures, Computer Systems, Linear Algebra, Discrete Mathematics,
