@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,27 +14,78 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --glass:     rgba(255,255,255,0.04);
-      --glass-hov: rgba(255,255,255,0.07);
-      --border:    rgba(255,255,255,0.08);
-      --border-hov:rgba(139,143,255,0.35);
-      --blue:      #818cf8;
-      --blue-lt:   #a5b4fc;
-      --blue-dim:  rgba(129,140,248,0.12);
-      --text:      #e8eaf6;
-      --muted:     #8892b0;
-      --tag-bg:    rgba(129,140,248,0.1);
-      --tag-text:  #a5b4fc;
-      --shadow-sm: 0 2px 16px rgba(0,0,0,0.35), 0 1px 4px rgba(0,0,0,0.25);
-      --shadow-md: 0 8px 40px rgba(99,102,241,0.22), 0 2px 10px rgba(0,0,0,0.4);
-      --radius:    14px;
+    :root { --radius: 14px; }
+
+    /* ── Dark theme (default) ── */
+    [data-theme="dark"] {
+      --bg:           #07080f;
+      --glass:        rgba(255,255,255,0.04);
+      --glass-hov:    rgba(255,255,255,0.07);
+      --border:       rgba(255,255,255,0.08);
+      --border-hov:   rgba(139,143,255,0.35);
+      --blue:         #818cf8;
+      --blue-lt:      #a5b4fc;
+      --blue-dim:     rgba(129,140,248,0.12);
+      --text:         #e8eaf6;
+      --muted:        #8892b0;
+      --tag-bg:       rgba(129,140,248,0.10);
+      --tag-text:     #a5b4fc;
+      --shadow-sm:    0 2px 16px rgba(0,0,0,0.35), 0 1px 4px rgba(0,0,0,0.25);
+      --shadow-md:    0 8px 40px rgba(99,102,241,0.22), 0 2px 10px rgba(0,0,0,0.4);
+      --nav-bg:       rgba(7,8,15,0.72);
+      --nav-scrolled: rgba(7,8,15,0.93);
+      --dot-c:        rgba(129,140,248,0.18);
+      --wash-a:       rgba(79,70,229,0.18);
+      --wash-b:       rgba(109,40,217,0.14);
+      --wash-c:       rgba(30,58,138,0.12);
+      --name-c1:      #e0e7ff;
+      --name-c2:      #818cf8;
+      --name-c3:      #c4b5fd;
+      --featured-b:   rgba(129,140,248,0.28);
+      --sb:           rgba(129,140,248,0.25);
+      --sb-hov:       rgba(129,140,248,0.50);
+    }
+
+    /* ── Light theme ── */
+    [data-theme="light"] {
+      --bg:           #f5f7ff;
+      --glass:        rgba(255,255,255,0.72);
+      --glass-hov:    rgba(255,255,255,0.92);
+      --border:       rgba(180,195,255,0.32);
+      --border-hov:   rgba(120,140,255,0.50);
+      --blue:         #6366f1;
+      --blue-lt:      #818cf8;
+      --blue-dim:     rgba(99,102,241,0.10);
+      --text:         #1a1f3c;
+      --muted:        #60709a;
+      --tag-bg:       rgba(99,102,241,0.07);
+      --tag-text:     #4a54b0;
+      --shadow-sm:    0 2px 16px rgba(99,102,241,0.07), 0 1px 4px rgba(0,0,0,0.04);
+      --shadow-md:    0 8px 40px rgba(99,102,241,0.13), 0 2px 10px rgba(0,0,0,0.05);
+      --nav-bg:       rgba(245,247,255,0.72);
+      --nav-scrolled: rgba(245,247,255,0.93);
+      --dot-c:        rgba(99,102,241,0.13);
+      --wash-a:       rgba(165,180,252,0.25);
+      --wash-b:       rgba(196,181,253,0.20);
+      --wash-c:       rgba(147,197,253,0.12);
+      --name-c1:      #1a1f3c;
+      --name-c2:      #4338ca;
+      --name-c3:      #818cf8;
+      --featured-b:   rgba(99,102,241,0.30);
+      --sb:           rgba(99,102,241,0.18);
+      --sb-hov:       rgba(99,102,241,0.38);
+    }
+
+    /* smooth theme transitions */
+    body, nav, .glass, .btn-glass, .tag, footer, .hero-stats {
+      transition: background 0.4s ease, background-color 0.4s ease,
+                  border-color 0.4s ease, color 0.3s ease, box-shadow 0.4s ease;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      background: #07080f;
+      background: var(--bg);
       min-height: 100vh;
       color: var(--text);
       font-family: 'Inter', sans-serif;
@@ -48,7 +99,7 @@
     body::before {
       content: '';
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
-      background-image: radial-gradient(circle, rgba(129,140,248,0.18) 1px, transparent 1px);
+      background-image: radial-gradient(circle, var(--dot-c) 1px, transparent 1px);
       background-size: 28px 28px;
       mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
       -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
@@ -59,9 +110,9 @@
       content: '';
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background:
-        radial-gradient(ellipse 60% 50% at 15% 20%, rgba(79,70,229,0.18) 0%, transparent 70%),
-        radial-gradient(ellipse 55% 45% at 85% 75%, rgba(109,40,217,0.14) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 40% at 55% 55%, rgba(30,58,138,0.12) 0%, transparent 70%);
+        radial-gradient(ellipse 60% 50% at 15% 20%, var(--wash-a) 0%, transparent 70%),
+        radial-gradient(ellipse 55% 45% at 85% 75%, var(--wash-b) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 40% at 55% 55%, var(--wash-c) 0%, transparent 70%);
     }
 
     /* ── Cursor blob: always visible behind content, snaps to cards ── */
@@ -186,14 +237,14 @@
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 clamp(1.5rem, 6vw, 4rem);
       height: 60px;
-      background: rgba(7,8,15,0.7);
+      background: var(--nav-bg);
       backdrop-filter: blur(20px) saturate(1.5);
       -webkit-backdrop-filter: blur(20px) saturate(1.5);
       border-bottom: 1px solid var(--border);
-      transition: background 0.3s, box-shadow 0.3s;
+      transition: background 0.4s, box-shadow 0.3s;
     }
     nav.scrolled {
-      background: rgba(7,8,15,0.92);
+      background: var(--nav-scrolled);
       box-shadow: 0 1px 20px rgba(99,102,241,0.07);
     }
     .nav-logo {
@@ -329,7 +380,7 @@
       font-size: clamp(3.2rem, 9vw, 5.5rem);
       font-weight: 700; line-height: 1.0;
       letter-spacing: -0.03em; margin-bottom: 0.8rem;
-      background: linear-gradient(125deg, #e0e7ff 0%, #818cf8 55%, #c4b5fd 100%);
+      background: linear-gradient(125deg, var(--name-c1) 0%, var(--name-c2) 55%, var(--name-c3) 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
@@ -401,7 +452,7 @@
       padding: 1.5rem 1.8rem;
     }
     /* BAM featured: slight indigo accent border */
-    .tl-card.tl-featured { border-color: rgba(129,140,248,0.28); }
+    .tl-card.tl-featured { border-color: var(--featured-b); }
     .tl-meta {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.69rem; color: var(--muted);
@@ -528,8 +579,42 @@
     /* ── Scrollbar ── */
     ::-webkit-scrollbar { width: 5px; }
     ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: rgba(129,140,248,0.25); border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: rgba(129,140,248,0.5); }
+    ::-webkit-scrollbar-thumb { background: var(--sb); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--sb-hov); }
+
+    /* ── Theme toggle ── */
+    .theme-toggle {
+      display: flex; align-items: center; gap: 0.5rem;
+      background: none; border: none; padding: 0;
+      flex-shrink: 0;
+    }
+    .t-icon {
+      width: 13px; height: 13px;
+      color: var(--muted);
+      transition: color 0.3s, opacity 0.3s;
+      flex-shrink: 0;
+    }
+    .t-track {
+      position: relative;
+      width: 40px; height: 22px;
+      background: var(--blue-dim);
+      border: 1px solid var(--border-hov);
+      border-radius: 100px;
+      transition: background 0.4s, border-color 0.4s;
+    }
+    .t-thumb {
+      position: absolute;
+      top: 3px; left: 3px;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--blue);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+      transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1), background 0.4s;
+    }
+    [data-theme="light"] .t-thumb { transform: translateX(18px); }
+    /* active icon gets accent color */
+    [data-theme="dark"]  .t-icon.t-moon { color: var(--blue); }
+    [data-theme="light"] .t-icon.t-sun  { color: var(--blue); }
 
     /* ── Responsive ── */
     @media (max-width: 640px) {
@@ -564,6 +649,15 @@
     <li><a href="#skills">Skills</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+    <svg class="t-icon t-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+    </svg>
+    <span class="t-track"><span class="t-thumb"></span></span>
+    <svg class="t-icon t-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
 </nav>
 
 <main>
@@ -1027,6 +1121,18 @@
 </footer>
 
 <script>
+  // ── Theme toggle ──
+  const html   = document.documentElement;
+  const tBtn   = document.getElementById('theme-toggle');
+  const stored = localStorage.getItem('theme');
+  if (stored) html.setAttribute('data-theme', stored);
+
+  tBtn.addEventListener('click', () => {
+    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+  });
+
   // ── Custom cursor ──
   const dot  = document.getElementById('cur-dot');
   const ring = document.getElementById('cur-ring');
