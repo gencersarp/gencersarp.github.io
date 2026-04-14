@@ -1373,9 +1373,6 @@
         const dx = l.cx - mX, dy = l.cy - mY;
         const d2 = dx * dx + dy * dy;
 
-        let target = l.baseAngle;
-        let k = 0.04; // slow spring-back when cursor is away
-
         if (d2 < R2) {
           const d         = Math.sqrt(d2);
           const proximity = 1 - d / RADIUS;        // 0 at edge → 1 at center
@@ -1401,9 +1398,8 @@
           }
 
           k = 0.28; // fast snap toward target when cursor is near
+          l.angle += (target - l.angle) * k;
         }
-
-        l.angle += (target - l.angle) * k;
 
         const cos = Math.cos(l.angle) * HALF_LEN;
         const sin = Math.sin(l.angle) * HALF_LEN;
