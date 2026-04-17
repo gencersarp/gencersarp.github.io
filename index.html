@@ -1398,9 +1398,7 @@
             target = l.angle + diff * force * 0.5;
           }
 
-          l.angle += (target - l.angle) * 0.3;
-          // clamp to avoid floating drift
-          l.angle = ((l.angle + Math.PI) % (Math.PI * 2)) - Math.PI;
+          l.angle = target;
         }
         // outside radius: do nothing — stick holds its position
 
@@ -1421,8 +1419,8 @@
     window.addEventListener('resize', resize, { passive: true });
     window.addEventListener('mousemove', e => {
       // Exponential moving average of velocity (px per event)
-      vX = vX * 0.55 + (e.clientX - mX) * 0.45;
-      vY = vY * 0.55 + (e.clientY - mY) * 0.45;
+      vX = vX * 0.3 + (e.clientX - mX) * 0.7;
+      vY = vY * 0.3 + (e.clientY - mY) * 0.7;
       mX = e.clientX;
       mY = e.clientY;
     }, { passive: true });
