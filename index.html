@@ -1375,31 +1375,34 @@
 
         if (d2 < R2) {
           const d         = Math.sqrt(d2);
-          const proximity = 1 - d / RADIUS;        // 0 at edge → 1 at center
-          const force     = proximity * proximity;  // squared: sharp centre focus
+          const proximity = 1 - d / RADIUS;       // 1 at center, 0 at edge
+          const force     = proximity * proximity; // sharper centre focus
 
+          let target;
           if (moving) {
-            // ── Carpet sweep: rotate to align with cursor movement direction ──
-            // Lines are symmetric so pick the end that requires the least rotation
-            let diff = sweepAngle - l.baseAngle;
+            // Carpet sweep: align stick with the direction the cursor is moving
+            let diff = sweepAngle - l.angle;
             while (diff >  Math.PI) diff -= Math.PI * 2;
             while (diff < -Math.PI) diff += Math.PI * 2;
+            // Lines are symmetric — pick the end needing less rotation
             if (diff >  Math.PI / 2) diff -= Math.PI;
             if (diff < -Math.PI / 2) diff += Math.PI;
-            target = l.baseAngle + diff * force * speedFactor;
+            target = l.angle + diff * force * speedFactor;
           } else {
-            // ── Cursor still: gentle radial splay outward ──
-            let diff = Math.atan2(dy, dx) - l.baseAngle;
+            // Cursor still: splay radially outward from cursor
+            let diff = Math.atan2(dy, dx) - l.angle;
             while (diff >  Math.PI) diff -= Math.PI * 2;
             while (diff < -Math.PI) diff += Math.PI * 2;
             if (diff >  Math.PI / 2) diff -= Math.PI;
             if (diff < -Math.PI / 2) diff += Math.PI;
-            target = l.baseAngle + diff * force * 0.55;
+            target = l.angle + diff * force * 0.5;
           }
 
-          k = 0.28; // fast snap toward target when cursor is near
-          l.angle += (target - l.angle) * k;
+          l.angle += (target - l.angle) * 0.3;
+          // clamp to avoid floating drift
+          l.angle = ((l.angle + Math.PI) % (Math.PI * 2)) - Math.PI;
         }
+        // outside radius: do nothing — stick holds its position
 
         const cos = Math.cos(l.angle) * HALF_LEN;
         const sin = Math.sin(l.angle) * HALF_LEN;
